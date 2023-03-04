@@ -9,12 +9,15 @@ using System.Drawing;
 using System.IO;
 using System.Data;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace E02.Controllers
 {
     public class StudentsController : Controller
     {
         KaarishoEntities db = new KaarishoEntities();
+
+        [Route("Students/List")]
         public ActionResult Index()
         {
             var students = db.Students;
@@ -177,4 +180,6 @@ namespace E02.Controllers
 
         
     }
+
+    
 }
