@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "ثبت نام";
+}
+
+<h2 class="jumbotron" style="text-align:center; padding-top:80px">به صفحه ثبت نام خوش آمدید</h2>
+
+<div class="container">
+    <form action="/Home/PersonalPage" enctype="multipart/form-data" method="post">
+        <table class="table table-bordered" >
+            <tr>
+                <td>
+                    <label>نام:</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="نام" name="firstName" />
+                </td>
+                <td>نام خانوادگی:</td>
+                <td>
+                    <input type="text" class="form-control" placeholder="نام خانوادگی" name="lastName" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>شماره تلفن:</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="تلفن" name="phoneNumber" />
+                </td>
+                <td>
+                    <label>ایمیل:</label>
+                </td>
+                <td>
+                    <input type="email" class="form-control" placeholder="آدرس ایمیل" name="email" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <lable>آدرس:</lable>
+                </td>
+                <td colspan="3">
+                    <textarea  class="form-control" placeholder="لطفا آدرس خود را وارد نمایید" name="address"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>استان:</label>
+                </td>
+                <td>
+                    <select class="form-control">
+                        <option hidden selected>لطفا استان مورد نظر را انتخاب کنید</option>
+                        <option value="1">تهران</option>
+                        <option value="2">اراک</option>
+                        <option value="3">اصفهان</option>
+                        <option value="4">شیراز</option>
+                    </select>
+                </td>
+                <td>
+                    <label>جنسیت:</label>
+                </td>
+                <td>
+                    <input type="radio" name="gender" class="form-control radio" value="1" />مرد
+                    <br />
+                    <input type="radio" name="gender" class="form-control radio" value="2" />زن
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>رمز عبور:</label>
+                </td>
+                <td>
+                    <input type="password" class="form-control" placeholder="رمز عبور خود را وارد نمایید" name="password" />
+                </td>
+                <td>
+                    <label>عکس پروفایل:</label>
+                </td>
+                <td>
+                    <input type="file" class="form-control" placeholder="عکس" name="profile" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="reset" class="form-control bg-danger" value="دوباره نویسی" />
+                </td>
+                <td colspan="2">
+                    <input type="submit" class="form-control bg-success" value="ثبت نام" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</div>
+
+
+
+
+

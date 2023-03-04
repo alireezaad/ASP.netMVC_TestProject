@@ -1,0 +1,81 @@
+﻿@model E02.Models.Students
+
+@{
+    string fullName = $"{Model.Name} {Model.Family}";
+    ViewBag.Title = "Details";
+}
+
+<h2 style="margin-top:50px">@fullName information</h2>
+
+<div>
+    <hr />
+    <dl class="jumbotron text-center form-inline">
+        <dt class="form-label">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd class="form-control">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+  
+        <dt class="form-label">
+            @Html.DisplayNameFor(model => model.Family)
+        </dt>
+
+        <dd class="form-control">
+            @Html.DisplayFor(model => model.Family)
+        </dd>
+
+        <dt class="form-label">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd class="form-control">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt class="form-label">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd class="form-control">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt class="form-label">
+            @Html.DisplayNameFor(model => model.RegisterDate)
+        </dt>
+
+        <dd class="form-control">
+            @Html.DisplayFor(model => model.RegisterDate)
+        </dd>
+
+        <dt class="form-label">
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd class="form-control">
+            @if (Model.IsActive)
+            {
+                <span style="color:green;">Active</span>
+            }
+            else
+            {
+                <span style="color:red;">Deactive</span>
+            }
+        </dd>
+
+        <dt class="form-label">
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+
+        <dd>
+            <img src="~/images/profile/@Model.ImageName" style="width:100px; height:100px;"/>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

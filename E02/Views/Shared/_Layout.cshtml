@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - سایت من |</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css"  type="text/css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-rtl.css"  />
+    <link rel="stylesheet" href="~/Content/bootstrap-rtl.min.css"  />
+    <link rel="stylesheet" href="~/Content/StyleSheet.css"/>
+</head>
+<body class="rtl">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top rtl" dir="rtl">
+            <div class="container-fluid rtl" >
+                <a class="navbar-brand" href="#">علیرضا</a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarNavAltMarkup"
+                        aria-controls="navbarNavAltMarkup"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" href="https://localhost:44336/">خانه</a>
+                        <a class="nav-link" href="Home/SellersList" >لیست دانشجویان</a>
+                        <a class="nav-link" href="#">قفلی</a>
+                        <a class="nav-link disabled">همکاری</a>
+                    </div>
+                </div>
+                <div>
+                     <a class="nav-link" href="https://localhost:44336/Home/SignUp">ثبت نام</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+        @RenderBody()
+        @RenderSection("home", false);
+        @RenderSection("AboutUs", false);
+        <hr />
+    <!-- Footer -->
+        <footer class="text-center text-lg-start bg-light text-muted fixed-bottom">
+            <!-- Section: Social media -->
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                © 2021 Copyright:
+                <a class="text-reset fw-bold" href="#">Copyright © 2020 Lig.ir Allright Reserved Powered By AzaranWeb </a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+    <!-- Footer -->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

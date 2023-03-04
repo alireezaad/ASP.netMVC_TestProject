@@ -1,0 +1,81 @@
+﻿@model IEnumerable<E02.Models.Students>
+
+@{
+    ViewBag.Title = "Index";
+    int counter = 100;
+
+}
+
+<h2>Students list</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            ردیف
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Family)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegisterDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>
+                @counter
+            </td>
+            <td>
+                @Html.DisplayFor(model => student.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => student.Family)
+            </td>
+            <td>
+                @Html.DisplayFor(model => student.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => student.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(model => student.RegisterDate)
+            </td>
+            <td>
+                @if (student.IsActive == true)
+                {
+                    <span style="color:green;">Active</span>
+                }
+                else
+                {
+                    <span style="color:red;">Deactive</span>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = student.Id }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Details", "Details","Students", new { id = student.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = student.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+        counter++;
+    }
+</table>
+<p>
+    @Html.ActionLink("Insert new student", "Create", null, new { @class = "btn btn-success" })
+</p>
+

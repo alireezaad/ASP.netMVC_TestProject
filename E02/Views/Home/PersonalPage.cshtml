@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "PersonalPage";
+}
+
+<h2 class="jumbotron" style="text-align:center">@Html.Action("LogedIn","Home", new {Name = "علیرضا", Lastname = "عباسی" })</h2>
+<div class="nav-right">
+    <img class="profile" src="@ViewBag.Image">
+    <h4 class="profile-name">@ViewBag.Name @ViewBag.Family</h4>
+    <h4 class="profile-name">@ViewBag.Phone</h4>
+    <ul class="list-group">
+        <li class="list-group-item">ویرایش نام کاربری</li>
+        <li class="list-group-item"><a href="https://localhost:44336/">خروج</a></li>
+    </ul>
+</div>
+<div class="nav-left container" style="float: left; width: 69%; padding-top: 20px; height: 400px; margin-left: 5%;">
+    <h2 style="text-align:right">از طریق فرم زیر میتوانید اطلاعات خود را ویرایش کنید:</h2>
+    <br />
+    <form action="/Home/PersonalPage" enctype="multipart/form-data" method="post">
+        <input type="text" name="firstName" class="form-control" placeholder="@ViewBag.Name">
+        <input type="text" name="lastName" class="form-control" placeholder="@ViewBag.Family">
+        <input type="tel" name="phoneNumber" class="form-control" placeholder="@ViewBag.Phone">
+        <br /> <br />
+        <input type="text" name="nationalCode" class="form-control" placeholder="@ViewBag.NationalCode">
+        <input type="email" name="emailAddress" class="form-control" placeholder="@ViewBag.Email">
+        <input type="file" name="profilePicture" class="form-control" placeholder="@ViewBag.Image">
+        <br /> <br />
+        <input type="submit" class="btn btn-success" style="float: left; margin-left: 180px;" value="ذخیره تغییرات" />
+    </form>
+</div>
+
