@@ -188,6 +188,7 @@
     </Compile>
     <Compile Include="Models\StudentsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Third-partyClass\HashPass.cs" />
     <Compile Include="Third-partyClass\PersianCulture.cs" />
   </ItemGroup>
   <ItemGroup>

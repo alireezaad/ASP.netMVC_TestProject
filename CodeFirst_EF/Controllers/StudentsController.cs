@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CodeFirst_EF.Models;
+using E02.Third_partyClass;
 
 namespace CodeFirst_EF.Controllers
 {
@@ -77,7 +78,7 @@ namespace CodeFirst_EF.Controllers
                     Family = newStudent.Family,
                     Phonenumber = newStudent.Phonenumber,
                     Email = newStudent.Email,
-                    Password = newStudent.Password,
+                    Password = HashPass.ComputeSha256Hash(newStudent.Password),
                     IsActive = true,
                     RegisterDate = DateTime.Now,
                 });
@@ -103,9 +104,6 @@ namespace CodeFirst_EF.Controllers
             return View(student);
         }
 
-        // POST: Students/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Family,Phonenumber,Email,Password,RegisterDate,IsActive")] Student student)
@@ -145,6 +143,32 @@ namespace CodeFirst_EF.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login([Bind(Include ="Phonenumber,Password")]StudentLoginViewModel student)
+        {
+            var pass = HashPass.ComputeSha256Hash(student.Password);
+            if (ModelState.IsValid)
+            {
+                var log = await db.students.FirstOrDefaultAsync(t => t.Phonenumber == student.Phonenumber && t.Password == pass);
+                if (log == null)
+                {
+                    ModelState.AddModelError("Phonenumber","شماره همراه یا رمز عبور صحیح نمی باشد!");
+                    return View(student);
+                }
+                else
+                {
+                    return RedirectToAction("Index","Home");
+                }
+            }
+            return View(student);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
