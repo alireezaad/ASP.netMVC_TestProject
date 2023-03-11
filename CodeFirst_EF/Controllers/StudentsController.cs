@@ -21,6 +21,29 @@ namespace CodeFirst_EF.Controllers
             return View(await db.students.ToListAsync());
         }
 
+        public async Task<ActionResult> StudentList()
+        {
+            var list = db.students.Select(t => new
+            {
+                t.Name,
+                t.Family,
+                t.Email,
+                t.Phonenumber
+            }).ToListAsync();
+
+            List<StudentViewModel> studentList = new List<StudentViewModel>();
+            foreach (var item in await list)
+            {
+                studentList.Add(new StudentViewModel()
+                {
+                    Name = item.Name,
+                    Family = item.Family,
+                    Email = item.Email,
+                    Phonenumber = item.Phonenumber
+                });
+            }
+            return View(studentList);
+        }
         // GET: Students/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -42,21 +65,27 @@ namespace CodeFirst_EF.Controllers
             return View();
         }
 
-        // POST: Students/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Family,Phonenumber,Email,Password,RegisterDate,IsActive")] Student student)
+        public async Task<ActionResult> Create([Bind(Include = "Name,Family,Phonenumber,Email,Password,PasswordConfirm")] StudentCreateViewModel newStudent)
         {
             if (ModelState.IsValid)
             {
-                db.students.Add(student);
+                db.students.Add(new Student() 
+                {
+                    Name = newStudent.Name,
+                    Family = newStudent.Family,
+                    Phonenumber = newStudent.Phonenumber,
+                    Email = newStudent.Email,
+                    Password = newStudent.Password,
+                    IsActive = true,
+                    RegisterDate = DateTime.Now,
+                });
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(student);
+            return View(newStudent);
         }
 
         // GET: Students/Edit/5
