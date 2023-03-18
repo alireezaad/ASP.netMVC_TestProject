@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using CodeFirst_EF.Models;
 using E02.Third_partyClass;
+using CodeFirst_EF.App_Start;
 
 namespace CodeFirst_EF.Controllers
 {
@@ -24,25 +25,13 @@ namespace CodeFirst_EF.Controllers
 
         public async Task<ActionResult> StudentList()
         {
-            var list = db.students.Select(t => new
-            {
-                t.Name,
-                t.Family,
-                t.Email,
-                t.Phonenumber
-            }).ToListAsync();
+            List<Student> list = await db.students.ToListAsync();
+
 
             List<StudentViewModel> studentList = new List<StudentViewModel>();
-            foreach (var item in await list)
-            {
-                studentList.Add(new StudentViewModel()
-                {
-                    Name = item.Name,
-                    Family = item.Family,
-                    Email = item.Email,
-                    Phonenumber = item.Phonenumber
-                });
-            }
+
+            studentList = AutoMapperConfig.mapper.Map<List<Student>, List<StudentViewModel>>(list);
+
             return View(studentList);
         }
         // GET: Students/Details/5
@@ -72,18 +61,24 @@ namespace CodeFirst_EF.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.students.Add(new Student() 
-                {
-                    Name = newStudent.Name,
-                    Family = newStudent.Family,
-                    Phonenumber = newStudent.Phonenumber,
-                    Email = newStudent.Email,
-                    Password = HashPass.ComputeSha256Hash(newStudent.Password),
-                    IsActive = true,
-                    RegisterDate = DateTime.Now,
-                });
+                //db.students.Add(new Student() 
+                //{
+                //    Name = newStudent.Name,
+                //    Family = newStudent.Family,
+                //    Phonenumber = newStudent.Phonenumber,
+                //    Email = newStudent.Email,
+                //    Password = HashPass.ComputeSha256Hash(newStudent.Password),
+                //    IsActive = true,
+                //    RegisterDate = DateTime.Now,
+                //});
+
+                Student student = AutoMapperConfig.mapper.Map<StudentCreateViewModel, Student>(newStudent);
+                student.Password = HashPass.ComputeSha256Hash(newStudent.Password);
+                student.IsActive = true;
+                student.RegisterDate = DateTime.Now;
+                db.students.Add(student);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("StudentList");
             }
 
             return View(newStudent);

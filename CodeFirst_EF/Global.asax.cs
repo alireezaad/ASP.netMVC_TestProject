@@ -1,4 +1,5 @@
-﻿using GSD.Globalization;
+﻿using CodeFirst_EF.App_Start;
+using GSD.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace CodeFirst_EF
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfig.Configuration();
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
