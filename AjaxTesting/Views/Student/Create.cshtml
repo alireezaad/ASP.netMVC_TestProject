@@ -1,0 +1,79 @@
+﻿@model AjaxTesting.Models.Student
+
+@{
+    ViewBag.Title = "فرم ثبت نام";
+}
+
+
+<div>
+    <div class="form-row">
+        <label>نام</label>
+        <div class="col">
+            <input type="text" id="FName" name="Name" class="form-control" />
+        </div>
+
+        <label>فامیلی</label>
+        <div class="col">
+            <input type="text" id="LName" name="Family" class="form-control" />
+        </div>
+    </div>
+    <hr />
+    <div class="form-row">
+        <label>موبایل</label>
+        <div class="col">
+            <input type="number" id="Mobile" name="Phonenumber" class="form-control" />
+        </div>
+
+        <label>سن</label>
+        <div class="col">
+            <input type="number" id="studentAge" name="Age" class="form-control" />
+        </div>
+    </div>
+    <button type="button" class="btn btn-success" onclick="RegisterStudent()">
+        ثبت نام
+    </button>
+    <br /><hr />
+    <div id="List">
+        @Html.Action("GetAllStudents")
+    </div>
+</div>
+
+@section js{
+    <script>
+        function RegisterStudent() {
+            var name = $("#FName").val();
+            var family = $("#LName").val();
+            var phone = $("#Mobile").val();
+            var age = $("#studentAge").val();
+            $.ajax({
+                url: '/Student/Register',
+                type: 'POST',
+                data: { firstName: name, lastName: family, mobile: phone, age: age },
+                success: function (res) {
+                    $("#List").html(res);
+                    $("#FName").val('');
+                    $("#LName").val('');
+                    $("#Mobile").val('');
+                    $("#studentAge").val('');
+                },
+                error: function () {
+                    alert("ثبت نام با خطا مواجه شد");
+                }
+            })
+        }
+
+        function DeleteStudent(studentId) {
+            $.ajax({
+                url: '/Student/RemoveStudent', // /Student/RemoveStudent
+                type: 'POST',
+                data: { studentId: studentId },
+                success: function (res) {
+                    $("#List").html(res);
+                },
+                error: function () {
+                    alert("حذف با خطا مواجه شد");
+                }
+            });
+        }
+    </script>
+}
