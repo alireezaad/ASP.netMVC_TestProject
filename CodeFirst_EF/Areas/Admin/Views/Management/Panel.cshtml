@@ -1,0 +1,39 @@
+﻿@model CodeFirst_EF.Models.Admins
+
+@{
+    ViewBag.Title = "Panel";
+}
+
+<div class="jumbotron">
+    <h4 style="text-align:center">علیرضا عباسی عزیز به جمع ما خوش آمدید</h4>
+</div>
+
+<div class="nav-right">
+    <img class="profile" src="~/images/profile/ali.jpg" />
+    <h5 class="profile-name">علی مقدم جاه</h5>
+    <h6 class="profile-name">09196177955</h6>
+    <ul class="list-group" style="margin-right:25px; margin-top:35px">
+        <li class="list-group-item" style="text-align:center"><a href="#" style="color:black;">ویرایش پروفایل</a></li>
+        <li class="list-group-item" style="text-align: center"><a href="#" style="color:black;">خروج</a></li>
+    </ul>
+</div>
+
+
+<div class="nav-left container" style="float: left; width: 69%; padding-top: 20px; height: 400px; margin-left: 5%; ">
+    <p>فرم ویرایش اطلاعات حساب کاربری</p>
+
+    <form action="/Home/singup" enctype="multipart/form-data" method="post">
+        <input type="text" name="firstName" class="form-control" placeholder="علی">
+        <input type="text" name="lastName" class="form-control" placeholder="مقدم جاه">
+        <input type="tel" name="phoneNumber" class="form-control" placeholder="09196177955">
+        <br /> <br />
+        <input type="text" name="nationalCode" class="form-control" placeholder="001147896">
+        <input type="email" name="emailAddress" class="form-control" placeholder="info@kaarisho.com">
+        <input type="file" name="profilePicture" class="form-control" placeholder="~/images/profile/ali.jpg">
+        <br /> <br />
+        <input type="submit" class="btn btn-success" style="float: left; margin-left: 180px;" value="ذخیره تغییرات" />
+    </form>
+
+</div>
+
+
